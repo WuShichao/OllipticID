@@ -1,0 +1,1 @@
+./Olliptic.x -eq Punctures_scalar_field -B Robin -BA 0.0 -Bn 1 -NumBH 2 -bhmp1 0.487209 -bhy1 5.5 -bhpx1 -0.0901099 -bhpy1 -0.000703975 -bhmp2 0.487209 -bhy2 -5.5 -bhpx2 0.0901099 -bhpy2 0.000703975 -L 1000 -N 65 -O 2 -l 9 -s 1e-11 -Dp 0.05 -nu2 20 -o TestSFCII -pc yes -ps_case 2

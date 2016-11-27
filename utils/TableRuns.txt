@@ -1,0 +1,196 @@
+# SPIN 1PN
+#####################################################
+
+ssh c1-3
+cd Olliptic/exe/c1-3
+nohup ../RunSet.sh Basin1PNS1 200 0.375 250 0.5 &
+nohup ../RunSet.sh Basin1PNS2 200 0.25 250 0.375 &
+nohup ../RunSet.sh Basin1PNS3 200 0.125 250 0.25 &
+nohup ../RunSet.sh Basin1PNS4 200 0 250 0.125 &
+exit
+
+ssh c2-3
+cd Olliptic/exe/c2-3
+nohup ../RunSet.sh Basin1PNS5 250 0.375 300 0.5 &
+nohup ../RunSet.sh Basin1PNS6 250 0.25 300 0.375 &
+nohup ../RunSet.sh Basin1PNS7 250 0.125 300 0.25 &
+nohup ../RunSet.sh Basin1PNS8 250 0 300 0.125 &
+exit
+
+ssh c3-0
+cd Olliptic/exe/c3-0
+nohup ../RunSet.sh Basin1PNS9 300 0.375 350 0.5 &
+nohup ../RunSet.sh Basin1PNS10 300 0.25 350 0.375 &
+nohup ../RunSet.sh Basin1PNS11 300 0.125 350 0.25 &
+nohup ../RunSet.sh Basin1PNS12 300 0 350 0.125 &
+exit
+
+
+
+# 1PNSzoom
+#####################################################
+
+ssh c0-2
+cd Olliptic/exe/c0-2
+nohup ../RunSet.sh Basin1PNSz1 275 0.4375 300 0.5 &
+nohup ../RunSet.sh Basin1PNSz2 275 0.375 300 0.4375 &
+nohup ../RunSet.sh Basin1PNSz3 275 0.3125 300 0.375 &
+nohup ../RunSet.sh Basin1PNSz4 275 0.25 300 0.3125 &
+exit
+
+ssh c7-0
+cd Olliptic/exe/c7-0
+nohup ../RunSet.sh Basin1PNSz5 300 0.4375 325 0.5 &
+nohup ../RunSet.sh Basin1PNSz6 300 0.375 325 0.4375 &
+nohup ../RunSet.sh Basin1PNSz7 300 0.3125 325 0.375 &
+exit
+
+nohup ../RunSet.sh Basin1PNSz8 300 0.25 325 0.3125 &
+
+
+ssh c1-0
+cd Olliptic/exe/c1-0
+nohup ../RunSet.sh Basin1PNSz9 325 0.4375 350 0.5 &
+nohup ../RunSet.sh Basin1PNSz10 325 0.375 350 0.4375 &
+nohup ../RunSet.sh Basin1PNSz11 325 0.3125 350 0.375 &
+nohup ../RunSet.sh Basin1PNSz12 325 0.25 350 0.3125 &
+exit
+
+
+# 1PNzoom
+#####################################################
+
+ssh c0-2
+cd Olliptic/exe/c0-2
+nohup ../RunSet.sh Basin1PNz1 275 0.4375 300 0.5 &
+nohup ../RunSet.sh Basin1PNz2 275 0.375 300 0.4375 &
+nohup ../RunSet.sh Basin1PNz3 275 0.3125 300 0.375 &
+nohup ../RunSet.sh Basin1PNz4 275 0.25 300 0.3125 &
+exit
+
+ssh c0-3
+cd Olliptic/exe/c0-3
+nohup ../RunSet.sh Basin1PNz5 300 0.4375 325 0.5 &
+nohup ../RunSet.sh Basin1PNz6 300 0.375 325 0.4375 &
+nohup ../RunSet.sh Basin1PNz7 300 0.3125 325 0.375 &
+nohup ../RunSet.sh Basin1PNz8 300 0.25 325 0.3125 &
+exit
+
+ssh c1-0
+cd Olliptic/exe/c1-0
+nohup ../RunSet.sh Basin1PNz9 325 0.4375 350 0.5 &
+nohup ../RunSet.sh Basin1PNz10 325 0.375 350 0.4375 &
+nohup ../RunSet.sh Basin1PNz11 325 0.3125 350 0.375 &
+nohup ../RunSet.sh Basin1PNz12 325 0.25 350 0.3125 &
+exit
+
+
+
+# (0+1+2.5)PN
+#####################################################
+
+ssh c3-1
+cd Olliptic/exe/c3-1
+nohup ../RunSet.sh Basin2.5PN1 200 0.375 250 0.5 &
+nohup ../RunSet.sh Basin2.5PN2 200 0.25 250 0.375 &
+nohup ../RunSet.sh Basin2.5PN3 200 0.125 250 0.25 &
+nohup ../RunSet.sh Basin2.5PN4 200 0 250 0.125 &
+exit
+
+ssh c3-3
+cd Olliptic/exe/c3-3
+nohup ../RunSet.sh Basin2.5PN5 250 0.375 300 0.5 &
+nohup ../RunSet.sh Basin2.5PN6 250 0.25 300 0.375 &
+nohup ../RunSet.sh Basin2.5PN7 250 0.125 300 0.25 &
+nohup ../RunSet.sh Basin2.5PN8 250 0 300 0.125 &
+exit
+
+ssh c4-0
+cd Olliptic/exe/c4-0
+nohup ../RunSet.sh Basin2.5PN9 300 0.375 350 0.5 &
+nohup ../RunSet.sh Basin2.5PN10 300 0.25 350 0.375 &
+nohup ../RunSet.sh Basin2.5PN11 300 0.125 350 0.25 &
+nohup ../RunSet.sh Basin2.5PN12 300 0 350 0.125 &
+exit
+
+
+ssh c4-1
+cd Olliptic/exe/c4-1
+nohup ../RunSet.sh Basin2.5PN12a 300 0 312.5 0.125 &
+nohup ../RunSet.sh Basin2.5PN12b 312.5 0 325 0.125 &
+nohup ../RunSet.sh Basin2.5PN12c 325 0 337.5 0.125 &
+nohup ../RunSet.sh Basin2.5PN12d 337.5 0 350 0.125 &
+exit
+
+# SPIN 2 
+#####################################################
+
+ssh c4-2
+cd Olliptic/exe/c4-2
+nohup ../RunSet.sh Basin1PNv2S1 200 0.375 250 0.5 &
+nohup ../RunSet.sh Basin1PNv2S2 200 0.25 250 0.375 &
+nohup ../RunSet.sh Basin1PNv2S3 200 0.125 250 0.25 &
+nohup ../RunSet.sh Basin1PNv2S4 200 0 250 0.125 &
+exit
+
+ssh c4-3
+cd Olliptic/exe/c4-3
+nohup ../RunSet.sh Basin1PNv2S5 250 0.375 300 0.5 &
+nohup ../RunSet.sh Basin1PNv2S6 250 0.25 300 0.375 &
+nohup ../RunSet.sh Basin1PNv2S7 250 0.125 300 0.25 &
+nohup ../RunSet.sh Basin1PNv2S8 250 0 300 0.125 &
+exit
+
+ssh c5-0
+cd Olliptic/exe/c5-0
+nohup ../RunSet.sh Basin1PNv2S9 300 0.375 350 0.5 &
+nohup ../RunSet.sh Basin1PNv2S10 300 0.25 350 0.375 &
+nohup ../RunSet.sh Basin1PNv2S11 300 0.125 350 0.25 &
+nohup ../RunSet.sh Basin1PNv2S12 300 0 350 0.125 &
+exit
+
+
+
+
+# (0+1+2.5)PN (re-run)
+#####################################################
+
+ssh c0-2
+cd Olliptic/exe/c0-2
+nohup ../RunSet.sh Basin2.5PNr1 200 0.375 250 0.5 &
+nohup ../RunSet.sh Basin2.5PNr2 200 0.25 250 0.375 &
+exit
+
+ssh c0-2
+cd Olliptic/exe/c0-2
+nohup ../RunSet.sh Basin2.5PNrr3 200 0.125 250 0.25 &
+nohup ../RunSet.sh Basin2.5PNrr4 200 0 250 0.125 &
+exit
+
+ssh c2-3
+cd Olliptic/exe/c2-3
+nohup ../RunSet.sh Basin2.5PNr5 250 0.375 300 0.5 &
+nohup ../RunSet.sh Basin2.5PNr6 250 0.25 300 0.375 &
+exit
+
+ssh c4-2
+cd Olliptic/exe/c4-2
+nohup ../RunSet.sh Basin2.5PNr7 250 0.125 300 0.25 &
+nohup ../RunSet.sh Basin2.5PNr8 250 0 300 0.125 &
+exit
+
+ssh c5-0
+cd Olliptic/exe/c5-0
+nohup ../RunSet.sh Basin2.5PNr9 300 0.375 350 0.5 &
+nohup ../RunSet.sh Basin2.5PNr10 300 0.25 350 0.375 &
+exit
+
+ssh c5-0
+cd Olliptic/exe/c5-0
+nohup ../RunSet.sh Basin2.5PNrr11 300 0.125 350 0.25 &
+nohup ../RunSet.sh Basin2.5PNrr12 300 0 350 0.125 &
+exit
+
+
+
+

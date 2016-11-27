@@ -1,0 +1,158 @@
+##############################
+# GNUPlot -- epslatex script #
+##############################
+
+#--> Some format quantities
+#--> Line width 
+llww=2
+#--> Line colors
+lc1=3
+lc2=1
+lc3=4
+lc4=2
+
+#--> Number of x tics
+nxt=4
+nx2t=4
+nyt=2
+ny2t=2
+
+
+rgb1="#4169E1"
+rgb2="#B22222"
+rgb3="#2E8B57"
+
+
+#--> Terminal  
+set terminal epslatex color lw llww "phv,bx" 11 dl 3
+
+#--> File name
+set output "figure.tex"
+
+#--> Definition of numerical quantities
+#--> Scales for example. 
+xu=1
+x2u=1
+
+yu=1
+y2u=1
+
+
+
+#--> Tics settings 
+set tics scale 2
+
+#--> X
+set xtics nomirror
+set mxtics nxt
+set mx2tics nx2t
+
+#--> Y 
+set ytics nomirror
+set mytics nyt
+set my2tics ny2t
+
+
+#--> Left and right margins 
+set lmarg 8
+set rmarg 4
+
+
+
+#--> Multiplot 
+set multiplot layout 1,1 columnsfirst 
+
+
+#---------------------------------------------------------------------->
+#--> Plot No. 1
+#--> Plot parameters
+
+#--> X formats 
+
+xmin=0
+xmax=1
+Nxt=5
+x2fac=1.0
+
+
+#--> Y formats 
+
+ymin=-1.1
+ymax=1.1
+Nyt=6
+y2fac=1.0
+
+
+#--> Automatic format. 
+#--> X
+xt=(xmax-xmin)/(Nxt-1.0)
+set xrange [ xmin : xmax+xt/nxt ]
+set xtics xt
+
+x2t=x2fac*xt
+set x2range [ x2fac*xmin : x2fac*xmax+x2t/nx2t ]
+set x2tics x2t
+
+#--> Y
+yt=(ymax-ymin)/(Nyt-1.0)
+set yrange [ ymin-yt/nyt : ymax+yt/nyt ]
+set ytics yt
+
+y2t=y2fac*yt
+set y2range [ y2fac*ymin-y2t/ny2t : y2fac*ymax+y2t/ny2t ]
+set y2tics y2t
+
+
+
+
+#--> Labels 
+
+#--> X
+#set format x ""
+set xlabel "X" 0,0
+
+#--> X2
+set format x2 ""
+#set x2label "X2" 0,0
+
+
+#--> Y
+#set format y ""
+set ylabel "Y" 1,0
+
+#--> Y2
+set format y2 ""
+#set y2label "Y2" 0,0
+
+
+set tmarg 2
+set bmarg 2
+
+
+#--> Label format 
+#set key outside
+#set key lmargin 1
+#set key at screen 0.325, screen 0.475
+#set key left 
+#set key top
+#set key horizontal
+#set key Left
+#set key samplen 2
+#set key spacing 1
+#set key width 1
+#set key height 1
+
+#set label 1 "$[\\times 10^{4}]$" at screen 0.075, screen 0.5
+
+plot    sin(x)\
+	t "$f(x)=\\sin(x)$"\
+	lw llww\
+	lc lc1\
+	w l
+
+#unset label 1
+
+#--> end
+set nomultiplot
+reset
+
