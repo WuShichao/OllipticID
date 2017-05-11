@@ -96,7 +96,7 @@ vpath %.h $(HDRSD)
 # target 1 : run exe
 # ---------------------------------------------------------------
 
-all: intro run
+all: intro setdirs run
 
 
 intro:
@@ -104,6 +104,8 @@ intro:
 	@echo '===> Making Olliptic ...'	
 	@echo ''	
 
+setdirs:
+	@mkdir -p $(EXED) $(OBJD) 
 
 run: $(OBJS) $(HDRS)
 	@echo ''
