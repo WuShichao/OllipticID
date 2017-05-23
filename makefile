@@ -64,7 +64,7 @@ EXE = Olliptic
 #CPP      = icpc
 CPP	= g++
 
-CPPFLAGS = -O3  ###-pg 
+CPPFLAGS = -O3 -ferror-limit=1  ###-pg 
 debug: CPPFLAGS = -O0 -g -pg -Wall
 
 

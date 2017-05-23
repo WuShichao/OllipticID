@@ -1314,6 +1314,13 @@ interface::proc_parameters ()
 
     }
 
+  if (string_par["equation"] == "Gauss-Bonnet")
+    {
+      equation = GAUSS_BONNET;
+
+      def_eq = true;
+
+    }
 
 //== END EQUATION PARAMETER ==//
 
@@ -1723,6 +1730,10 @@ interface::string_equation ()
   text.setf (ios_base::right, ios_base::adjustfield);
   text.width (46);
   text << "  " << "BY-EM" << endl;
+
+    text.setf (ios_base::right, ios_base::adjustfield);
+  text.width (46);
+  text << "  " << "Gauss-Bonnet" << endl;
 
   return (text.str ());
 

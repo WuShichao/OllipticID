@@ -151,7 +151,7 @@ class elliptic
 
   vector<double> u_at_p;
 
-
+  double alpha_GB=0;
 
   double eps_coarse;
 
@@ -445,6 +445,64 @@ class elliptic
   }
 
 
+
+//=================== Punctures in Gauss-Bonnet ====================//
+
+
+
+  inline double puncture_GB_OP (size_t l, size_t ibox)
+  {
+
+    double psi = vars.Get_val (l, ibox,var_index[0]);
+    double Lap_psi=vars.Lap(l, ibox, var_index[0]);
+    
+    double psi_dx = vars.Dx (l, ibox,var_index[0]);
+    double psi_dy = vars.Dy (l, ibox,var_index[0]);
+    double psi_dz = vars.Dz (l, ibox,var_index[0]);
+
+    double psi_dxdx = vars.DDx (l, ibox,var_index[0]);
+    double psi_dydx = vars.DDxy (l, ibox,var_index[0]);
+    double psi_dzdx = vars.DDxz (l, ibox,var_index[0]);
+
+    double psi_dxdy = vars.DDxy (l, ibox,var_index[0]);
+    double psi_dydy = vars.DDy (l, ibox,var_index[0]);
+    double psi_dzdy = vars.DDyz (l, ibox,var_index[0]);
+
+    double psi_dxdz = vars.DDxz (l, ibox,var_index[0]);
+    double psi_dydz = vars.DDyz (l, ibox,var_index[0]);
+    double psi_dzdz = vars.DDz (l, ibox,var_index[0]);
+    
+    double phi    = vars.Get_val (l, ibox,coeff_index[0]);
+
+    double phi_dx = vars.Get_val (l, ibox,coeff_index[1]);
+    double phi_dy = vars.Get_val (l, ibox,coeff_index[2]);
+    double phi_dz = vars.Get_val (l, ibox,coeff_index[3]);
+
+    double phi_dxdx = vars.Get_val (l, ibox,coeff_index[4]);
+    double phi_dydx = vars.Get_val (l, ibox,coeff_index[5]);
+    double phi_dzdx = vars.Get_val (l, ibox,coeff_index[6]);
+
+    double phi_dxdy = vars.Get_val (l, ibox,coeff_index[7]);
+    double phi_dydy = vars.Get_val (l, ibox,coeff_index[8]);
+    double phi_dzdy = vars.Get_val (l, ibox,coeff_index[9]);
+
+    double phi_dxdz = vars.Get_val (l, ibox,coeff_index[10]);
+    double phi_dydz = vars.Get_val (l, ibox,coeff_index[11]);
+    double phi_dzdz = vars.Get_val (l, ibox,coeff_index[12]);
+
+    
+    return Lap_psi -4*alpha_GB*pow(phi_dx, 2)*psi_dxdx*exp(-phi)/pow(psi, 4) - 2*alpha_GB*pow(phi_dx, 2)*psi_dydy*exp(-phi)/pow(psi, 4) - 2*alpha_GB*pow(phi_dx, 2)*psi_dzdz*exp(-phi)/pow(psi, 4) - 4*alpha_GB*pow(phi_dx, 2)*pow(psi_dx, 2)*exp(-phi)/pow(psi, 5) + 2*alpha_GB*pow(phi_dx, 2)*pow(psi_dy, 2)*exp(-phi)/pow(psi, 5) + 2*alpha_GB*pow(phi_dx, 2)*pow(psi_dz, 2)*exp(-phi)/pow(psi, 5) - 4*alpha_GB*phi_dx*phi_dy*psi_dxdy*exp(-phi)/pow(psi, 4) - 12*alpha_GB*phi_dx*phi_dy*psi_dx*psi_dy*exp(-phi)/pow(psi, 5) - 4*alpha_GB*phi_dx*phi_dz*psi_dxdz*exp(-phi)/pow(psi, 4) - 12*alpha_GB*phi_dx*phi_dz*psi_dx*psi_dz*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dx*psi_dx*psi_dxdx*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dx*psi_dxdy*psi_dy*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dx*psi_dxdz*psi_dz*exp(-phi)/pow(psi, 5) - 16*alpha_GB*phi_dx*pow(psi_dx, 3)*exp(-phi)/pow(psi, 6) - 16*alpha_GB*phi_dx*psi_dx*pow(psi_dy, 2)*exp(-phi)/pow(psi, 6) - 16*alpha_GB*phi_dx*psi_dx*pow(psi_dz, 2)*exp(-phi)/pow(psi, 6) + 2*alpha_GB*phi_dxdx*psi_dydy*exp(-phi)/pow(psi, 4) + 2*alpha_GB*phi_dxdx*psi_dzdz*exp(-phi)/pow(psi, 4) - 2*alpha_GB*phi_dxdx*pow(psi_dx, 2)*exp(-phi)/pow(psi, 5) - 2*alpha_GB*phi_dxdx*pow(psi_dy, 2)*exp(-phi)/pow(psi, 5) - 2*alpha_GB*phi_dxdx*pow(psi_dz, 2)*exp(-phi)/pow(psi, 5) - 4*alpha_GB*phi_dxdy*psi_dxdy*exp(-phi)/pow(psi, 4) - 4*alpha_GB*phi_dxdz*psi_dxdz*exp(-phi)/pow(psi, 4) - 2*alpha_GB*pow(phi_dy, 2)*psi_dxdx*exp(-phi)/pow(psi, 4) - 4*alpha_GB*pow(phi_dy, 2)*psi_dydy*exp(-phi)/pow(psi, 4) - 2*alpha_GB*pow(phi_dy, 2)*psi_dzdz*exp(-phi)/pow(psi, 4) + 2*alpha_GB*pow(phi_dy, 2)*pow(psi_dx, 2)*exp(-phi)/pow(psi, 5) - 4*alpha_GB*pow(phi_dy, 2)*pow(psi_dy, 2)*exp(-phi)/pow(psi, 5) + 2*alpha_GB*pow(phi_dy, 2)*pow(psi_dz, 2)*exp(-phi)/pow(psi, 5) - 4*alpha_GB*phi_dy*phi_dz*psi_dydz*exp(-phi)/pow(psi, 4) - 12*alpha_GB*phi_dy*phi_dz*psi_dy*psi_dz*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dy*psi_dx*psi_dxdy*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dy*psi_dy*psi_dydy*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dy*psi_dydz*psi_dz*exp(-phi)/pow(psi, 5) - 16*alpha_GB*phi_dy*pow(psi_dx, 2)*psi_dy*exp(-phi)/pow(psi, 6) - 16*alpha_GB*phi_dy*pow(psi_dy, 3)*exp(-phi)/pow(psi, 6) - 16*alpha_GB*phi_dy*psi_dy*pow(psi_dz, 2)*exp(-phi)/pow(psi, 6) + 2*alpha_GB*phi_dydy*psi_dxdx*exp(-phi)/pow(psi, 4) + 2*alpha_GB*phi_dydy*psi_dzdz*exp(-phi)/pow(psi, 4) - 2*alpha_GB*phi_dydy*pow(psi_dx, 2)*exp(-phi)/pow(psi, 5) - 2*alpha_GB*phi_dydy*pow(psi_dy, 2)*exp(-phi)/pow(psi, 5) - 2*alpha_GB*phi_dydy*pow(psi_dz, 2)*exp(-phi)/pow(psi, 5) - 4*alpha_GB*phi_dydz*psi_dydz*exp(-phi)/pow(psi, 4) - 2*alpha_GB*pow(phi_dz, 2)*psi_dxdx*exp(-phi)/pow(psi, 4) - 2*alpha_GB*pow(phi_dz, 2)*psi_dydy*exp(-phi)/pow(psi, 4) - 4*alpha_GB*pow(phi_dz, 2)*psi_dzdz*exp(-phi)/pow(psi, 4) + 2*alpha_GB*pow(phi_dz, 2)*pow(psi_dx, 2)*exp(-phi)/pow(psi, 5) + 2*alpha_GB*pow(phi_dz, 2)*pow(psi_dy, 2)*exp(-phi)/pow(psi, 5) - 4*alpha_GB*pow(phi_dz, 2)*pow(psi_dz, 2)*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dz*psi_dx*psi_dxdz*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dz*psi_dy*psi_dydz*exp(-phi)/pow(psi, 5) - 8*alpha_GB*phi_dz*psi_dz*psi_dzdz*exp(-phi)/pow(psi, 5) - 16*alpha_GB*phi_dz*pow(psi_dx, 2)*psi_dz*exp(-phi)/pow(psi, 6) - 16*alpha_GB*phi_dz*pow(psi_dy, 2)*psi_dz*exp(-phi)/pow(psi, 6) - 16*alpha_GB*phi_dz*pow(psi_dz, 3)*exp(-phi)/pow(psi, 6) + 2*alpha_GB*phi_dzdz*psi_dxdx*exp(-phi)/pow(psi, 4) + 2*alpha_GB*phi_dzdz*psi_dydy*exp(-phi)/pow(psi, 4) - 2*alpha_GB*phi_dzdz*pow(psi_dx, 2)*exp(-phi)/pow(psi, 5) - 2*alpha_GB*phi_dzdz*pow(psi_dy, 2)*exp(-phi)/pow(psi, 5) - 2*alpha_GB*phi_dzdz*pow(psi_dz, 2)*exp(-phi)/pow(psi, 5) - 6*alpha_GB*pow(psi_dx, 2)*psi_dxdx*exp(-phi)/pow(psi, 5) - 12*alpha_GB*psi_dx*psi_dxdy*psi_dy*exp(-phi)/pow(psi, 5) - 12*alpha_GB*psi_dx*psi_dxdz*psi_dz*exp(-phi)/pow(psi, 5) - 6*alpha_GB*pow(psi_dy, 2)*psi_dydy*exp(-phi)/pow(psi, 5) - 12*alpha_GB*psi_dy*psi_dydz*psi_dz*exp(-phi)/pow(psi, 5) - 6*alpha_GB*pow(psi_dz, 2)*psi_dzdz*exp(-phi)/pow(psi, 5) + (1.0L/16.0L)*pow(phi_dx, 2)*psi + (1.0L/16.0L)*pow(phi_dy, 2)*psi + (1.0L/16.0L)*pow(phi_dz, 2)*psi;
+
+  }
+
+
+  inline double puncture_GB_duOP (size_t l, size_t ibox)
+  {
+
+    return 0;
+
+
+  }
 
 //===================== Electromagnetic BH =========================//
 
@@ -1151,22 +1209,84 @@ class elliptic
 //============================ Punctures ==================================//
 
 
-  double punctures_b (double x, double y, double c);
+  double punctures_b (double x, double y, double z);
 
-  double punctures_c (double x, double y, double c);
+  double punctures_c (double x, double y, double z);
 
 
 //===================== Punctures_scalar_field =========================//
 
 
-  double punctures_scalar_d (double x, double y, double c);
+  double punctures_scalar_d (double x, double y, double z);
 
-  double punctures_scalar_e (double x, double y, double c);
+  double punctures_scalar_e (double x, double y, double z);
 
-  double test_ps(double x, double y, double c);
+  double test_ps(double x, double y, double z);
 
 
+//===================== Punctures_Gauss_Bonnet =========================//
 
+
+  double phi (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+
+  double phi_dx (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    if (r !=0)
+      return -2*(r-ps_r0)*ps_isigma*x*phi(x,y,z)*x/r;
+    else
+      return 0;}
+
+  
+  double phi_dy (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    if (r !=0)
+      return -2*(r-ps_r0)*ps_isigma*x*phi(x,y,z)*y/r;
+    else
+      return 0;}
+
+  double phi_dz (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    if (r !=0)
+      return -2*(r-ps_r0)*ps_isigma*x*phi(x,y,z)*z/r;
+    else
+      return 0;}
+
+  double phi_dxdx (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    if (r !=0)
+      return -2*(r-ps_r0)*ps_isigma*x*phi(x,y,z)*x/r;
+    else
+      return 0;}
+  
+  double phi_dydx (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+  double phi_dzdx (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+
+  double phi_dxdy (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+  double phi_dydy (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+  double phi_dzdy (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+
+  double phi_dxdz (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+  double phi_dydz (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+  double phi_dzdz (double x, double y, double z)
+  { double r = sqrt (x * x + y * y + z * z);
+    return ps_phi0*exp(-(r-ps_r0)*(r-ps_r0)*ps_isigma);}
+  
 //============================ NOS_ID ==================================//
 
 

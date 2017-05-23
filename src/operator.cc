@@ -152,6 +152,41 @@ elliptic::Set_Equation ()
       break;
 
 
+    case GAUSS_BONNET:
+
+
+      var_names.push_back ("psi");
+
+
+      coeff_names.push_back ("phi");
+
+      coeff_names.push_back ("phi_dx");
+      coeff_names.push_back ("phi_dy");
+      coeff_names.push_back ("phi_dz");
+
+      coeff_names.push_back ("phi_dxdx");
+      coeff_names.push_back ("phi_dydx");
+      coeff_names.push_back ("phi_dzdx");
+
+      coeff_names.push_back ("phi_dxdy");
+      coeff_names.push_back ("phi_dydy");
+      coeff_names.push_back ("phi_dzdy");
+
+      coeff_names.push_back ("phi_dxdz");
+      coeff_names.push_back ("phi_dydz");
+      coeff_names.push_back ("phi_dzdz");
+
+      
+      Operator.push_back (&elliptic::puncture_GB_OP);
+
+      duOperator.push_back (&elliptic::puncture_GB_duOP);
+
+      Info_Punctures ();
+
+
+
+      break;
+
 
     case PUNCTURES_EM:
 
@@ -833,6 +868,147 @@ elliptic::Set_Coefficients ()
       break;
 
 
+    case GAUSS_BONNET:
+
+      vars.Set_Iterator (coeff_names, ALL);
+
+      do
+	{
+
+	  double x = vars.Get_x ("phi");
+
+	  double y = vars.Get_y ("phi");
+
+	  double z = vars.Get_z ("phi");
+
+	  vars.Set_val (phi (x, y, z), "phi");
+
+	  vars.Set_val (phi_dx (x, y, z), "phi_dx");
+	  vars.Set_val (phi_dy (x, y, z), "phi_dy");
+	  vars.Set_val (phi_dz (x, y, z), "phi_dz");
+
+	  vars.Set_val (phi_dxdx (x, y, z), "phi_dxdx");
+	  vars.Set_val (phi_dydx (x, y, z), "phi_dydx");
+	  vars.Set_val (phi_dzdx (x, y, z), "phi_dzdx");
+
+	  vars.Set_val (phi_dxdy (x, y, z), "phi_dxdy");
+	  vars.Set_val (phi_dydy (x, y, z), "phi_dydy");
+	  vars.Set_val (phi_dzdy (x, y, z), "phi_dzdy");
+
+	  vars.Set_val (phi_dxdz (x, y, z), "phi_dxdz");
+	  vars.Set_val (phi_dydz (x, y, z), "phi_dydz");
+	  vars.Set_val (phi_dzdz (x, y, z), "phi_dzdz");
+	  
+
+	}
+      while (vars.End (coeff_names));
+
+      //Compute_ADM_Mass();
+      
+      //exit(0);
+
+      vars.Set_Iterator (source_names, ALL);
+
+
+      do
+	{
+
+	  double x = vars.Get_x ("rho0");
+
+	  double y = vars.Get_y ("rho0");
+
+	  double z = vars.Get_z ("rho0");
+
+	  vars.Set_val (0, "rho0");
+
+
+
+	}
+      while (vars.End (source_names));
+
+
+      Boundary.push_back (&elliptic::zero);
+
+
+
+      falloff_n.push_back (1);
+
+      boundary_coeff.push_back (0.0);
+
+
+
+
+      break;
+
+    case METRIC_TEST:
+
+      vars.Set_Iterator (coeff_names, ALL);
+
+      do
+	{
+
+	  double x = vars.Get_x ("b");
+
+	  double y = vars.Get_y ("b");
+
+	  double z = vars.Get_z ("b");
+
+	  vars.Set_val (punctures_b (x, y, z), "b");
+
+	  vars.Set_val (punctures_c (x, y, z), "c");
+	  
+	  /*
+	  double r2=x*x+y*y+z*z;
+	  r2 = r2==0? 0.000001 : r2;
+	  double rho2=x*x+y*y;
+	  rho2 = rho2==0? 0.000001 : rho2;
+	  double r=sqrt(r2);
+
+	  vars.Set_val (r*pow(2*z*sqrt(x*x+y*y)/r2,2)*pow((x*x-y*y)/rho2,2), "c");
+	  */
+	  vars.Set_val (punctures_scalar_d (x, y, z), "d");
+
+	  vars.Set_val (punctures_scalar_e (x, y, z), "e");
+
+	}
+      while (vars.End (coeff_names));
+
+      //Compute_ADM_Mass();
+      
+      //exit(0);
+
+      vars.Set_Iterator (source_names, ALL);
+
+
+      do
+	{
+
+	  double x = vars.Get_x ("rho0");
+
+	  double y = vars.Get_y ("rho0");
+
+	  double z = vars.Get_z ("rho0");
+
+	  vars.Set_val (test_ps(x,y,z), "rho0");
+
+
+
+	}
+      while (vars.End (source_names));
+
+
+      Boundary.push_back (&elliptic::zero);
+
+
+
+      falloff_n.push_back (1);
+
+      boundary_coeff.push_back (0.0);
+
+
+
+
+      break;
 
     case PUNCTURES_EM:
 
@@ -2178,7 +2354,6 @@ double elliptic::punctures_scalar_d (double X, double Y, double Z)
 
 
 }
-
 
 
 double elliptic::punctures_scalar_e (double X, double Y, double Z)

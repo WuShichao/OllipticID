@@ -92,7 +92,8 @@ enum t_equation
   PUNCTURES_SCALAR,
   PUNCTURES_EM,
   BOWEN_YORK,
-  BY_EM
+  BY_EM,
+  GAUSS_BONNET
 };
 
 //== Domain symmetry ==//
